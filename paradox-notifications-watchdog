@@ -1,0 +1,42 @@
+#!/bin/sh
+ 
+#description: watchdog for paradox-notifications
+#processname: paradox-notifications-watchdog
+ 
+MYSERVICE_PID=`pidof /opt/pegasus2.11.0/bin/cimserver`
+ 
+check_paradox-notifications() {
+        if [ -z $MYSERVICE_PID ];then
+                sudo service paradox-notifications start
+        fi
+}
+ 
+check_paradox-notifications
+ 
+usage() {
+    echo "paradox-notifications-watchdog {start|stop|status}"
+    exit 0
+}
+ 
+case $1 in
+    start ) if [-z $MYSERVICE_PID ];then
+        sudo service paradox-notifications start
+        else
+            echo "paradox-notifications is already running"
+        fi
+        ;;
+    stop ) if [ -n $MYSERVICE_PID ];then
+        sudo service paradox-notifications stop
+        else
+            echo "paradox-notifications is already stopped"
+        fi
+        ;;
+    status) if [ -z $MYSERVICE_PID ];then
+            echo "paradox-notifications is not running"
+        else
+            echo "paradox-notifications is running"
+        fi
+        ;;
+    *) usage
+        ;;
+esac

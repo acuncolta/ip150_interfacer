@@ -67,7 +67,7 @@ def listen_http(queue, mutex):
         elif re.match('GET /partiel', req):
             if globals.Verbose:
                 print '\033[94m' + "* <WEBSERVER> : GET /partiel" + '\033[0m'
-	    partiel()
+            partiel()
             csock.sendall("Partiel")
         elif re.match('GET /stop', req):
             run = False

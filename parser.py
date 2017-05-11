@@ -1,5 +1,6 @@
 # -*-coding:Latin-1 -*
 import sys,os
+from core_functions import *
 from MyHTMLParser import *
 from pyjsparser import PyJsParser
 from parser_const import *
@@ -43,12 +44,12 @@ def parse_equipment(js_html_list):
 	if not zones or not areas:
 		if globals.Verbose:
 			if not zones:
-				print '\033[91m' + "* <PARSER> : Unable to locate zones" + '\033[0m'
+				logmsg("* <PARSER> : Unable to locate zones")
 			if not areas:
-				print'\033[91m' + "* <PARSER> : Unable to locate areas" + '\033[0m'
+				logmsg("* <PARSER> : Unable to locate areas")
 		return False
 	if globals.Verbose:
-		print '\033[94m' + "* <PARSER> : Zones & areas found, parsing..." + '\033[0m'
+		logmsg("* <PARSER> : Zones & areas found, parsing...")
 	parsed_zones = []
 	parsed_areas = []
 	active = False
@@ -60,7 +61,7 @@ def parse_equipment(js_html_list):
 	for element in areas:
 		parsed_areas.append({"name": element["value"], "armed": False})
 	if globals.Verbose:
-		print '\033[94m' + "* <PARSER> : Zones & areas parsed" + '\033[0m'
+		logmsg("* <PARSER> : Zones & areas parsed")
 	return (parsed_zones, parsed_areas)
 
 def parse_ses(js_html_list):
@@ -95,12 +96,12 @@ def parse_status(js_html_list):
 	if not status_list or not states_list:
 		if globals.Verbose:
 			if not status_list:
-				print '\033[91m' + "* <PARSER> : Unable to locate status" + '\033[0m'
+				logmsg("* <PARSER> : Unable to locate status")
 			if not states_list:
-				print '\033[91m' + "* <PARSER> : Unable to parse states" + '\033[0m'
+				logmsg("* <PARSER> : Unable to parse states")
 		return False
 	if globals.Verbose:
-		print '\033[94m' + "* <PARSER> : Status & states found, parsing..." + '\033[0m'
+		logmsg("* <PARSER> : Status & states found, parsing...")
 	status = []
 	states = []
 	for element in status_list:
@@ -108,7 +109,7 @@ def parse_status(js_html_list):
 	for element in states_list:
 		states.append(element["value"])
 	if globals.Verbose:
-		print '\033[94m' + "* <PARSER> : Status & states parsed" + '\033[0m'
+		logmsg("* <PARSER> : Status & states parsed")
 	return (status,states)
 
 def remove_special_chars(string):

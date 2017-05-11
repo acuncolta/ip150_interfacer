@@ -1,7 +1,11 @@
-import os, sys
-from const import *
+import os, sys, syslog
+# from const import *
 import numpy
 
+def logmsg(msg):
+    print msg
+    syslog.syslog(syslog.LOG_INFO, 'Paradox Notification: %s' % msg)
+	
 def unsigned_right_shift_32(a, b):
 	return (a & 0xFFFFFFFF) >> b
 
@@ -132,11 +136,11 @@ def keeplowbyte(svalue):
 		sre += ctemp
 	return sre
 
-def login_encrypt(ses):
-	tmp_pass = keeplowbyte(PASSWORD)
+def login_encrypt(ses, user_code, password):
+	tmp_pass = keeplowbyte(password)
 	tmp_pass = hex_md5(tmp_pass)
 	tmp_pass = tmp_pass + ses
-	user_enc = rc4(tmp_pass, USER_CODE)
+	user_enc = rc4(tmp_pass, user_code)
 	pass_enc = hex_md5(tmp_pass)
 	return {'user': user_enc, 'password': pass_enc}
 	

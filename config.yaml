@@ -1,0 +1,54 @@
+paradox:
+  user_code: YOUR_PARADOX_USER # INSERT PIN CODE HERE
+  password: "YOUR_PARADOX_PASSWORD" # INSERT PASSWORD HERE
+  ip_addr : "xxx.xxx.xxx.xxx" # INSERT IP ADDRESS HERE
+  tcp_port: "10000" # INSERT PORT HERE (DEFAULT 10000)
+  status_interval: 1
+  login_max_retry: 20
+  login_wait_time_start: 5
+  login_wait_time_mult: 3
+  ready_wait_time: 1
+  # sleep_time: 8
+  # state_codes: ["1": "Desarme", "2": "Arme", "5": "Partiel", "7": "Delais evacuation"]
+  # det_open_codes: [1,6]
+  # det_memory_codes: [5,6]
+zones: # Zone activity notifications for start and stop. Valid options are "yes" or "no"
+  notify:
+    start: "yes"
+    stop: "yes"
+  messages: # Use {} as the place where the zone name will be displayed
+    start: "[PARADOX] {} is now active"
+    stop: "[PARADOX] {} is now idle" 
+areas: # Area activity notifications for start and stop. Valid options are "yes" or "no"
+  notify:
+    start: "yes"
+    stop: "yes"
+  messages: # Use {} as the place where the area name will be displayed
+    start: "[PARADOX] {} is now active"
+    stop: "[PARADOX] {} is now idle" 
+push:
+  service: "jeedom" # Acceptable options are "instapush" or "pushover" or "ifttt" or "jeedom"
+  instapush:
+    appID: "YOUR_INSTAPUSH_APPID"
+    appSecret: "YOUR_INSTAPUSH_APPSECRET"
+  pushover:
+    userKey: "YOUR_PUSHOVER_USERKEY"
+    appToken: "YOUR_PUSHOVER_APPTOKEN"
+    sound: "pushover"
+  ifttt:
+    eventName: "YOUR_IFTTT_EVENT_NAME"
+    userKey: "YOUR_IFTTT_USER_KEY"
+  jeedom:
+    jeedomIP: "YOUR_JEEDOM_IP_ADDRESS"
+    jeedomDIY: ""
+    jeedomApiKey: "YOUR_JEEDOM_API_KEY"
+    jeedomZonesIDs: [100, 101, 102, 103, ...] # Replace with your Jeedom alarm zones virtuals IDs
+    jeedomAreasIDs: [200, 201] # Replace with your Jeedom alarm areas virtuals IDs
+email:
+  from: "you@yourdomain.com"
+  to: "you@yourdomain.com"
+  subject: "Paradox Push Notification Script Failure"
+  text: "The Paradox push notification script has crashed, or stopped. The error reported was: {}"
+  server: "localhost" # Valid options are "localhost" or "gmail". Using GMail will reduce the email being flagged as spam
+  gmailUsername: "YOUR_GMAIL_USERNAME"
+  gmailPassword: "YOUR_GMAIL_PASSWORD"
